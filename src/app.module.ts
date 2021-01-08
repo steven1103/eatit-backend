@@ -61,4 +61,8 @@ import { JwtMiddleware } from './jwt/jwt.middleware';
 })
 
 // graphql Route의 모든 Method만 미들웨어를 적용시킨다는 것
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer:MiddlewareConsumer) {
+    consumer.apply(JwtMiddleware).forRoutes({path:'/graphql',method:RequestMethod.ALL})
+  }
+}
