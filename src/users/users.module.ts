@@ -13,7 +13,8 @@ import { UserService } from './users.service';
     ConfigService,
     JwtModule
 ],
-    providers:[UsersResolver, UserService]
+    providers:[UsersResolver, UserService],
+    exports:[UserService]
 })
 export class UsersModule {}
 

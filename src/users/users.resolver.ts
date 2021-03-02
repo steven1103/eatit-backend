@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import {
   CreateAccountInput,
   createAccountOutput,
@@ -51,7 +51,11 @@ export class UsersResolver {
   }
 
   @Query(returns => User) 
-  me() {
-    
+  me( @Context() context) {
+   if (!context.user) {
+     return
+   } else {
+     return context.user;
+   }
   }
 }
