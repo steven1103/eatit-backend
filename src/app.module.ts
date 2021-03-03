@@ -18,6 +18,8 @@ import { CommonModule } from './common/common.module';
 import { User } from './users/entities/user.entity';
 import { JwtModule } from './jwt/jwt.module';
 import { JwtMiddleware } from './jwt/jwt.middleware';
+import { Category } from './restaurants/entities/category.entity';
+import { Verify } from 'crypto';
 
 @Module({
   imports: [
@@ -44,7 +46,7 @@ import { JwtMiddleware } from './jwt/jwt.middleware';
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: true,
-      entities: [User, Restaurant],
+      entities: [User, Restaurant, Category],
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true,
