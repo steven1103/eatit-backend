@@ -18,9 +18,9 @@ import { CommonModule } from './common/common.module';
 import { User } from './users/entities/user.entity';
 import { JwtModule } from './jwt/jwt.module';
 import { JwtMiddleware } from './jwt/jwt.middleware';
-import { Category } from './restaurants/entities/category.entity';
 import { Verify } from 'crypto';
-
+import { Verification } from './users/entities/verification.entity';
+import { Category } from './restaurants/entities/category.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -45,8 +45,8 @@ import { Verify } from 'crypto';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'prod',
-      logging: true,
-      entities: [User, Restaurant, Category],
+      logging: false,
+      entities: [User, Restaurant, Category, Verification],
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true,

@@ -8,10 +8,11 @@ import {
   Length,
 } from 'class-validator';
 import { CoreEntity } from 'src/common/entities/core.entity';
+import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Category } from './category.entity';
 
-@InputType({ isAbstract: true })
+@InputType('RestaurantInputType', { isAbstract: true })
 @ObjectType()
 @Entity()
 export class Restaurant extends CoreEntity {
@@ -22,7 +23,7 @@ export class Restaurant extends CoreEntity {
   name: string;
 
   @Field((type) => String)
-  @Column()
+  @Column({ nullable: true })
   @IsString()
   coverImg: string;
 
@@ -31,7 +32,14 @@ export class Restaurant extends CoreEntity {
   @IsString()
   address: string;
 
-  @Field((type) => Category)
-  @ManyToOne((type) => Category, (category) => category.restaurants)
+  @Field((type) => Category, { nullable: true })
+  @ManyToOne((type) => Category, (category) => category.restaurants, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   category: Category;
+
+  @Field((type) => User)
+  @ManyToOne((type) => User, (category) => category.restaurants)
+  owner: User;
 }
