@@ -21,6 +21,8 @@ import { JwtMiddleware } from './jwt/jwt.middleware';
 import { Verify } from 'crypto';
 import { Verification } from './users/entities/verification.entity';
 import { Category } from './restaurants/entities/category.entity';
+import { AuthModule } from './auth/auth.module';
+import { MailModule } from './mail/mail.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -57,6 +59,12 @@ import { Category } from './restaurants/entities/category.entity';
     CommonModule,
     JwtModule.forRoot({
       privateKey: process.env.SECRET_KEY,
+    }),
+    AuthModule,
+    MailModule.forRoot({
+      apiKey: process.env.MAILGUN_API_KEY,
+      domain: process.env.MAILGUN_DOMAIN_NAME,
+      fromEmail: process.env.MAILGUN_FROM_EMAIL,
     }),
   ],
   controllers: [],

@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Field, InputType, ObjectType, PickType } from "@nestjs/graphql";
-import { MutationOutPut } from "src/common/dtos/output.dto";
-import { User } from "../entities/user.entity";
-
-@ObjectType()
-export class LoginOutPut extends MutationOutPut {
-    @Field(type=>String,{nullable:true})
-    token?:string;
-}
+import { Field, InputType, ObjectType, PickType } from '@nestjs/graphql';
+import { CoreOutput } from 'src/common/dtos/core.output';
+import { User } from '../entities/user.entity';
 
 @InputType()
-export class LoginInPut extends PickType(User, ["email","password"]) {}
+export class LoginInput extends PickType(User, ['email', 'password']) {}
+
+@ObjectType()
+export class LoginOutput extends CoreOutput {
+  @Field((type) => String, { nullable: true })
+  token?: string;
+}

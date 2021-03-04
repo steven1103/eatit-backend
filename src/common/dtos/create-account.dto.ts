@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Field, InputType, ObjectType, PickType } from '@nestjs/graphql';
-import { MutationOutPut } from 'src/common/dtos/output.dto';
-import { User } from '../entities/user.entity';
+import { User } from 'src/users/entities/user.entity';
+import { CoreOutput } from './core.output';
 
 @InputType()
 export class CreateAccountInput extends PickType(User, [
@@ -11,4 +11,4 @@ export class CreateAccountInput extends PickType(User, [
 ]) {}
 
 @ObjectType()
-export class CreateAccountOutput extends MutationOutPut {}
+export class CreateAccountOutput extends CoreOutput {}
